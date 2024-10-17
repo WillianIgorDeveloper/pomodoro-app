@@ -6,7 +6,7 @@ export function GlobalLayout() {
   const { background } = useGlobalContext()
 
   return (
-    <div className={cn("w-full h-screen rounded-2xl p-3", background)}>
+    <div className={cn("w-full h-screen rounded-2xl p-3 z-20 absolute", background)}>
       <Outlet />
     </div>
   )

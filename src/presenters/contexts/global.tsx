@@ -16,6 +16,13 @@ interface IGlobalContext {
   currentTimerRunningOn: string
   currentRound: number
   timerIsRunning: boolean
+  setFocusPeriod: React.Dispatch<React.SetStateAction<string>>
+  setBreakPeriod: React.Dispatch<React.SetStateAction<string>>
+  setLongBreakPeriod: React.Dispatch<React.SetStateAction<string>>
+  setRounds: React.Dispatch<React.SetStateAction<number>>
+  setFocusBackground: React.Dispatch<React.SetStateAction<string>>
+  setBreakBackground: React.Dispatch<React.SetStateAction<string>>
+  setLongBreakBackground: React.Dispatch<React.SetStateAction<string>>
   updateBackground: (value: string) => void
   restartPomodoro: () => void
   pausePomodoro: () => void
@@ -41,7 +48,6 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
 
   function updateBackground(value: string) {
     localStorage.setItem("background", JSON.stringify(value))
-    setBackground(value)
   }
 
   function startPomodoro() {
@@ -49,7 +55,7 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
 
     let timerRunningOn = currentTimerRunningOn
     let timer = currentTimer
-    let round = currentRound
+    let round = rounds
 
     const newInterval = setInterval(() => {
       if (timerRunningOn === "focus") {
@@ -67,9 +73,10 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
             return
           }
 
+          round -= 1
+          setCurrentRound((prev) => prev + 1)
+
           if (round === Number((rounds / 2).toFixed(0))) {
-            round -= 1
-            setCurrentRound(round + 1)
             timer = longBreakPeriod
             setCurrentTimer(longBreakPeriod)
             timerRunningOn = "longBreak"
@@ -79,8 +86,6 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
             return
           }
 
-          round -= 1
-          setCurrentRound(round + 1)
           timer = breakPeriod
           setCurrentTimer(breakPeriod)
           timerRunningOn = "break"
@@ -243,6 +248,13 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
         currentTimerRunningOn,
         currentRound,
         timerIsRunning,
+        setFocusPeriod,
+        setBreakPeriod,
+        setLongBreakPeriod,
+        setRounds,
+        setFocusBackground,
+        setBreakBackground,
+        setLongBreakBackground,
         updateBackground,
         restartPomodoro,
         pausePomodoro,

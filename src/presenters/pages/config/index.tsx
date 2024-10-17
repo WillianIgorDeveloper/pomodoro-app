@@ -1,5 +1,4 @@
 import { Button } from "@ui/button"
-import { cn } from "@/utils/cn"
 import { ROUTES } from "@/utils/routes"
 import { ChevronRightIcon, PaletteIcon, TimerIcon } from "lucide-react"
 import { Link } from "react-router-dom"
@@ -13,8 +12,8 @@ export function ConfigPage() {
       <div className="w-full h-full flex gap-2">
         <div className="flex-1">
           <ul className="space-y-1">
-            <li>
-              <Link to={`${ROUTES.TIMER}focus`}>
+            <li className="relative z-40">
+              <Link to={ROUTES.TIMER_FOCUS}>
                 <Button className="w-full justify-between h-7 pr-1">
                   Focus
                   <div className="flex items-center gap-1">
@@ -25,7 +24,7 @@ export function ConfigPage() {
               </Link>
             </li>
             <li>
-              <Link to={`${ROUTES.TIMER}break`}>
+              <Link to={ROUTES.TIMER_BREAK}>
                 <Button className="w-full justify-between h-7 pr-1">
                   Break
                   <div className="flex items-center gap-1">
@@ -36,7 +35,7 @@ export function ConfigPage() {
               </Link>
             </li>
             <li>
-              <Link to={`${ROUTES.TIMER}longBreak`}>
+              <Link to={ROUTES.TIMER_LONGBREAK}>
                 <Button className="w-full justify-between h-7 pr-1">
                   LongBreak
                   <div className="flex items-center gap-1">
@@ -47,7 +46,7 @@ export function ConfigPage() {
               </Link>
             </li>
             <li>
-              <Link to={`${ROUTES.TIMER}rounds`}>
+              <Link to={ROUTES.TIMER_ROUNDS}>
                 <Button className="w-full justify-between h-7 pr-1">
                   Rounds
                   <div className="flex items-center gap-1">

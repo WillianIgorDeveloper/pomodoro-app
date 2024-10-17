@@ -12,19 +12,21 @@ import { useGlobalContext } from "@/presenters/contexts/global"
 export function ColorPicker({ target }: { target: string }) {
   const context = useGlobalContext()
 
-  const [background, setBackground] = useState("")
+  const [currentBackground, setCurrentBackground] = useState("")
 
   function handleUpdateBackgroundColor(value: string) {
     localStorage.setItem(`${target}Background`, JSON.stringify(value))
     localStorage.setItem("background", JSON.stringify(value))
-    setBackground(value)
+    if (target === "focus") context.setFocusBackground(value)
+    if (target === "break") context.setBreakBackground(value)
+    if (target === "longBreak") context.setLongBreakBackground(value)
     context.updateBackground(value)
   }
 
   useEffect(() => {
-    if (target === "focus") setBackground(context.focusBackground)
-    if (target === "break") setBackground(context.breakBackground)
-    if (target === "longBreak") setBackground(context.longBreakBackground)
+    if (target === "focus") setCurrentBackground(context.focusBackground)
+    if (target === "break") setCurrentBackground(context.breakBackground)
+    if (target === "longBreak") setCurrentBackground(context.longBreakBackground)
   }, [
     context.focusBackground,
     context.breakBackground,
@@ -33,20 +35,30 @@ export function ColorPicker({ target }: { target: string }) {
   ])
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <div className={cn("size-5 rounded-full ring-2 ring-white", background)} />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="flex items-center">
-        {BGCOLORS.map((color) => (
-          <DropdownMenuItem
-            key={color.id}
-            onClick={() => handleUpdateBackgroundColor(color.color)}
-          >
-            <div className={cn("size-5 rounded-full ring-2 ring-white", color.color)} />
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <div
+            className={cn("size-5 rounded-full ring-2 ring-white", currentBackground)}
+          />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="flex items-center">
+          {BGCOLORS.map((color) => (
+            <DropdownMenuItem
+              key={color.id}
+              onClick={() => handleUpdateBackgroundColor(color.color)}
+            >
+              <div className={cn("size-5 rounded-full ring-2 ring-white", color.color)} />
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <div
+        className={cn(
+          "w-full h-full fixed top-0 left-0 rounded-xl -z-10",
+          currentBackground,
+        )}
+      />
+    </>
   )
 }

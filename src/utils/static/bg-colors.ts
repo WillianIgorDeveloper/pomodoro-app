@@ -1,26 +1,26 @@
 export const BGCOLORS = [
   {
-    id: "Hyper",
-    color: "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500",
+    id: "001",
+    color: "bg-gradient-to-r from-blue-500 to-blue-600",
   },
   {
-    id: "Oceanic",
-    color: "bg-gradient-to-r from-green-300 via-blue-500 to-purple-600",
+    id: "002",
+    color: "bg-gradient-to-r from-red-500 to-red-800",
   },
   {
-    id: "Cotton Candy",
-    color: "bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400",
+    id: "003",
+    color: "bg-gradient-to-r from-green-500 to-green-700",
   },
   {
-    id: "Gotham",
-    color: "bg-gradient-to-r from-gray-700 via-gray-900 to-black",
+    id: "004",
+    color: "bg-gradient-to-r from-purple-800 via-violet-900 to-purple-800",
   },
   {
-    id: "Valentine",
-    color: "bg-gradient-to-r from-red-200 to-red-600",
+    id: "007",
+    color: "bg-gradient-to-r from-orange-600 to-orange-500",
   },
   {
-    id: "Gunmetal",
-    color: "bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600",
+    id: "008",
+    color: "bg-gradient-to-b from-orange-500 to-yellow-300",
   },
 ]

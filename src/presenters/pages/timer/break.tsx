@@ -1,5 +1,4 @@
-import { cn } from "@utils/cn"
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { ROUTES } from "@/utils/routes"
 import { Button } from "@ui/button"
 import { Settings2Icon, TimerIcon } from "lucide-react"
@@ -8,21 +7,21 @@ import { useState } from "react"
 import { FixDigits } from "@/utils/functions/fix-digits"
 import { useGlobalContext } from "@/presenters/contexts/global"
 
-export function TimerPage() {
+export function BreakPage() {
   const context = useGlobalContext()
-  const { pathname } = useLocation()
 
-  const [minutes, setMinutes] = useState(context.focusPeriod.split(":")[0])
-  const [seconds, setSeconds] = useState(context.focusPeriod.split(":")[1])
+  const [minutes, setMinutes] = useState(context.breakPeriod.split(":")[0])
+  const [seconds, setSeconds] = useState(context.breakPeriod.split(":")[1])
 
   function updateLocalPeriod(value: string) {
-    localStorage.setItem(`${pathname.split("/")[2]}Period`, JSON.stringify(value))
+    localStorage.setItem("breakPeriod", JSON.stringify(value))
+    context.setBreakPeriod(value)
   }
 
   return (
     <div className="w-full h-full flex gap-1">
       <div className="flex-1 flex flex-col gap-1 items-center justify-center">
-        <span className="capitalize text-xl">{pathname.split("/")[2]}</span>
+        <span className="capitalize text-xl">Break</span>
         <div className="flex items-center gap-4">
           <div className="flex items-start gap-1">
             <input
@@ -55,7 +54,7 @@ export function TimerPage() {
               }}
             />
           </div>
-          <ColorPicker target={pathname.split("/")[2]} />
+          <ColorPicker target="break" />
         </div>
       </div>
 

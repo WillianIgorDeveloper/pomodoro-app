@@ -18,7 +18,7 @@ export function HomePage() {
         <span className="text-6xl font-bold">{context.currentTimer}</span>
         <div className="flex gap-1 items-center justify-center">
           {Array.from({ length: context.rounds }).map((_, i) => {
-            if (i === context.currentRound - 1)
+            if (i <= context.currentRound - 1)
               return <CircleCheckBigIcon key={i} size={14} />
             return <CircleDashedIcon size={14} key={i} />
           })}
